@@ -1,31 +1,5 @@
-import { initializeApp, cert, getApps } from 'firebase-admin/app';
-import { getFirestore } from 'firebase-admin/firestore';
 import { NextResponse } from 'next/server';
-
-// Initialize Firebase Admin SDK
-const apps = getApps();
-
-if (!apps.length) {
-  try {
-    console.log('Initializing Firebase Admin SDK...');
-    console.log('Project ID:', process.env.FIREBASE_PROJECT_ID);
-    console.log('Client Email:', process.env.FIREBASE_CLIENT_EMAIL ? 'Set' : 'Not set');
-    console.log('Private Key:', process.env.FIREBASE_PRIVATE_KEY ? 'Set' : 'Not set');
-    
-    initializeApp({
-      credential: cert({
-        projectId: process.env.FIREBASE_PROJECT_ID,
-        clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
-        privateKey: process.env.FIREBASE_PRIVATE_KEY?.replace(/\\n/g, '\n'),
-      }),
-    });
-    console.log('Firebase Admin SDK initialized successfully');
-  } catch (error) {
-    console.error('Error initializing Firebase Admin SDK:', error);
-  }
-}
-
-const db = getFirestore();
+import { adminDb } from '@/lib/firebaseAdmin';
 
 export async function GET() {
   return NextResponse.json({ 
@@ -39,7 +13,7 @@ export async function POST(request: Request) {
   try {
     console.log('API route called');
     
-    // Check if Firebase is initialized
+    // Check if Firebase environment variables are set
     if (!process.env.FIREBASE_PROJECT_ID || !process.env.FIREBASE_CLIENT_EMAIL || !process.env.FIREBASE_PRIVATE_KEY) {
       console.error('Missing Firebase environment variables');
       return NextResponse.json({ 
@@ -62,7 +36,7 @@ export async function POST(request: Request) {
     console.log('Adding document to Firestore with data:', { url, category, title, addedBy });
 
     // Add document to Firestore
-    const docRef = await db.collection('youtubeLinks').add({
+    const docRef = await adminDb.collection('youtubeLinks').add({
       url,
       category,
       title: title || '', // Optional field
