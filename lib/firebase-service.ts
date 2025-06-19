@@ -1,6 +1,10 @@
+// This file is for frontend (client SDK) usage only. Do not import in API routes or backend code.
 import { collection, query, where, getDocs, addDoc } from 'firebase/firestore';
-import { db } from './firebase';
+import app from '@/firebase/firebaseClient';
+import { getFirestore } from 'firebase/firestore';
 import { YouTubeLink, YouTubeLinkCategory } from './types';
+
+const db = getFirestore(app);
 
 export async function getYouTubeLinksByCategory(category: YouTubeLinkCategory): Promise<YouTubeLink[]> {
   try {

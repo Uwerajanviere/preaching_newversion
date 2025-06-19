@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
-import { adminDb } from '@/lib/firebaseAdmin';
 
 export async function GET() {
+  const { db } = await import('@/firebase/firebaseAdmin');
   return NextResponse.json({ 
     message: 'API is working',
     firebaseConfigured: !!(process.env.FIREBASE_PROJECT_ID && process.env.FIREBASE_CLIENT_EMAIL && process.env.FIREBASE_PRIVATE_KEY),
@@ -10,6 +10,7 @@ export async function GET() {
 }
 
 export async function POST(request: Request) {
+  const { db } = await import('@/firebase/firebaseAdmin');
   try {
     console.log('API route called');
     
@@ -35,8 +36,8 @@ export async function POST(request: Request) {
 
     console.log('Adding document to Firestore with data:', { url, category, title, addedBy });
 
-    // Add document to Firestore
-    const docRef = await adminDb.collection('youtubeLinks').add({
+    // Add document to Firestore using Admin SDK
+    const docRef = await db.collection('youtubeLinks').add({
       url,
       category,
       title: title || '', // Optional field
