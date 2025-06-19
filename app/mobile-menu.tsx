@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
+import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet"
 import { Menu, X } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
@@ -10,8 +10,7 @@ import Image from "next/image"
 export function MobileMenu() {
   const [open, setOpen] = useState(false)
 
-  const handleClose = (e?: React.MouseEvent) => {
-    e?.preventDefault()
+  const handleClose = () => {
     setOpen(false)
   }
 
@@ -23,6 +22,7 @@ export function MobileMenu() {
         </Button>
       </SheetTrigger>
       <SheetContent side="right" className="bg-black/95 border-white/10 p-0">
+        <SheetTitle className="sr-only">Mobile Menu</SheetTitle>
         <div className="flex flex-col h-full">
           <div className="p-4 border-b border-white/10 flex justify-end">
             <Button variant="ghost" size="icon" onClick={handleClose}>
@@ -30,28 +30,15 @@ export function MobileMenu() {
             </Button>
           </div>
           <nav className="flex flex-col p-4 gap-4">
-            <a
-              href="#listen-section"
-              className="text-white text-lg py-2 hover:text-white/80 transition"
-              onClick={handleClose}
-            >
-              Watch
-            </a>
             <div className="flex flex-col gap-4">
-              <Link href="/about" onClick={handleClose}>
-                <Button variant="ghost" className="w-full justify-start text-white hover:bg-white/10">
-                  About
-                </Button>
+              <Link href="/about" className="text-white text-lg py-2 hover:text-white/80 transition" onClick={handleClose}>
+                About
               </Link>
-              <Link href="/#latest-sermons" onClick={handleClose}>
-                <Button variant="ghost" className="w-full justify-start text-white hover:bg-white/10">
-                  Latest Sermons
-                </Button>
+              <Link href="/contact" className="text-white text-lg py-2 hover:text-white/80 transition" onClick={handleClose}>
+                Contact
               </Link>
-              <Link href="/contact" onClick={handleClose}>
-                <Button variant="ghost" className="w-full justify-start text-white hover:bg-white/10">
-                  Contact Us
-                </Button>
+              <Link href="/#latest-sermons" className="text-white text-lg py-2 hover:text-white/80 transition" onClick={handleClose}>
+                Latest Sermons
               </Link>
             </div>
           </nav>
