@@ -9,12 +9,7 @@ import { Navigation } from "@/components/navigation"
 
 export default function ContactPage() {
   return (
-    <div className="relative min-h-screen flex flex-col">
-      {/* Background Image */}
-      <div className="fixed inset-0 -z-10">
-        <Image src="/images/sunrise.jpg" alt="Sunrise background" fill priority className="object-cover" />
-        <div className="absolute inset-0 bg-black/50" />
-      </div>
+    <div className="relative min-h-screen flex flex-col bg-white">
 
       {/* Navigation */}
       <Navigation />

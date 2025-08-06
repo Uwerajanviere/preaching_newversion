@@ -60,10 +60,10 @@ export default function CollectionsPage() {
       </div>
 
       {/* Header with Logo Link */}
-      <header className="relative z-20 w-full bg-black/60 backdrop-blur-sm">
+      <header className="relative z-20 w-full bg-[#0a3a5c] backdrop-blur-sm">
         <div className="container mx-auto px-4 py-4">
-          <Link href="/" className="text-3xl font-bold text-amber-400">
-            Matthew 28:18-19
+          <Link href="/" className="text-3xl font-bold text-white">
+            yera
           </Link>
         </div>
       </header>

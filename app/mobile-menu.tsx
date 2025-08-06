@@ -31,15 +31,7 @@ export function MobileMenu() {
           </div>
           <nav className="flex flex-col p-4 gap-4">
             <div className="flex flex-col gap-4">
-              <Link href="/about" className="text-white text-lg py-2 hover:text-white/80 transition" onClick={handleClose}>
-                About
-              </Link>
-              <Link href="/contact" className="text-white text-lg py-2 hover:text-white/80 transition" onClick={handleClose}>
-                Contact
-              </Link>
-              <Link href="/#latest-sermons" className="text-white text-lg py-2 hover:text-white/80 transition" onClick={handleClose}>
-                Latest Sermons
-              </Link>
+              {/* Navigation links removed - now in footer */}
             </div>
           </nav>
           <div className="mt-auto p-4 flex flex-col gap-4">

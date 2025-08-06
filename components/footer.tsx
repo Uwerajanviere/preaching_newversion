@@ -3,6 +3,8 @@
 import Link from "next/link"
 import { Facebook, Instagram, Youtube } from "lucide-react"
 import { useState, useEffect } from "react"
+import { Button } from "@/components/ui/button"
+import Image from "next/image"
 
 export function Footer() {
   const [currentYear, setCurrentYear] = useState('');
@@ -13,33 +15,35 @@ export function Footer() {
 
   return (
     <footer className="relative z-10 mt-auto">
-      <div className="bg-orange-900 py-12 px-4">
+      <div className="bg-[#0a3a5c] py-12 px-4">
         <div className="container mx-auto">
           {/* Logo */}
           <div className="flex justify-center mb-8">
-            <Link href="/" className="text-4xl font-bold text-amber-400">
-              Matthew 28:18-19
+            <Link href="/" className="text-4xl font-bold text-white">
+              yera
             </Link>
           </div>
 
           {/* Navigation */}
-          <div className="flex flex-wrap justify-center gap-x-8 gap-y-4 mb-10 text-amber-400">
+          <div className="flex flex-wrap justify-center gap-x-8 gap-y-4 mb-10 text-white">
             <Link href="/#latest-sermons" className="hover:underline">
               WATCH
             </Link>
-            <span className="hidden md:inline text-amber-400/50">|</span>
+            <span className="hidden md:inline text-white/50">|</span>
             <Link href="/about" className="hover:underline">
               ABOUT
             </Link>
-            <span className="hidden md:inline text-amber-400/50">|</span>
+            <span className="hidden md:inline text-white/50">|</span>
             <Link href="/contact" className="hover:underline">
               CONTACT US
             </Link>
-            <span className="hidden md:inline text-amber-400/50">|</span>
+            <span className="hidden md:inline text-white/50">|</span>
             <Link href="/privacy" className="hover:underline">
               PRIVACY POLICY
             </Link>
           </div>
+
+
 
           {/* Social Media */}
           <div className="flex justify-center gap-4 mb-10">
@@ -73,7 +77,7 @@ export function Footer() {
           </div>
 
           {/* Copyright */}
-          <div className="text-center text-amber-400/80 text-sm px-4">
+          <div className="text-center text-white/80 text-sm px-4">
             <p>
               © {currentYear || '2024'} Atlantic Gateway Communications, Inc. Atlantic Gateway Communications, Inc.
               serves and ministers to people globally through its ministries – MARTIN, Sermons, Teachings &

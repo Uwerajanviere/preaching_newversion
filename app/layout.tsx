@@ -21,7 +21,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={inter.className + " bg-[#0a3a5c] text-white"}>
         <ThemeProvider attribute="class" defaultTheme="dark" disableTransitionOnChange>
           <div className="flex flex-col min-h-screen">
             {children}
