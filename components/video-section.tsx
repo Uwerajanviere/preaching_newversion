@@ -43,11 +43,11 @@ export function VideoSection({ category, limit }: VideoSectionProps) {
   // Always render the same structure to prevent hydration mismatch
   return (
     <div className="space-y-4">
-      <h3 className="text-2xl font-bold text-white text-center">{category}</h3>
+      <h3 className="text-2xl font-bold text-foreground text-center">{category}</h3>
       {!isMounted || isLoading ? (
-        <div className="animate-pulse bg-black/20 rounded-xl h-48"></div>
+        <div className="animate-pulse bg-muted/50 rounded-xl h-48"></div>
       ) : error ? (
-        <div className="bg-red-500/20 rounded-xl p-4 text-white text-center">
+        <div className="bg-destructive/20 rounded-xl p-4 text-destructive-foreground text-center">
           {error}
         </div>
       ) : videos.length > 0 ? (
@@ -55,7 +55,7 @@ export function VideoSection({ category, limit }: VideoSectionProps) {
           <YouTubeVideo key={video.id} video={video} />
         ))
       ) : (
-        <div className="bg-black/20 rounded-xl p-4 text-white text-center">
+        <div className="bg-muted/50 rounded-xl p-4 text-muted-foreground text-center">
           No videos available
         </div>
       )}

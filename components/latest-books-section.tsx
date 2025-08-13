@@ -40,18 +40,18 @@ export function LatestBooksSection() {
 
   if (loading) {
     return (
-      <section className="py-16 bg-white">
+      <section className="py-16 bg-background">
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between mb-8">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900">Ibitabo</h2>
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground">Ibitabo</h2>
           </div>
           <div className="flex gap-4 overflow-x-auto pb-4">
             {[...Array(6)].map((_, i) => (
               <div key={i} className="flex-shrink-0 w-40">
                 <div className="animate-pulse">
-                  <div className="aspect-square bg-gray-200 rounded-lg mb-2"></div>
-                  <div className="h-4 bg-gray-200 rounded mb-1"></div>
-                  <div className="h-3 bg-gray-200 rounded w-3/4"></div>
+                  <div className="aspect-square bg-muted rounded-lg mb-2"></div>
+                  <div className="h-4 bg-muted rounded mb-1"></div>
+                  <div className="h-3 bg-muted rounded w-3/4"></div>
                 </div>
               </div>
             ))}
@@ -66,12 +66,12 @@ export function LatestBooksSection() {
   }
 
   return (
-    <section className="py-16 bg-white">
+    <section className="py-16 bg-background">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between mb-8">
           <div className="flex items-center gap-3">
-            <Book className="h-8 w-8 text-blue-600" />
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900">Ibitabo</h2>
+            <Book className="h-8 w-8 text-primary" />
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground">Ibitabo</h2>
           </div>
           <Link href="/ibitabo">
             <Button variant="outline" className="flex items-center gap-2">
@@ -96,10 +96,10 @@ export function LatestBooksSection() {
                     />
                   </div>
                   <div className="p-3">
-                    <h3 className="font-semibold text-sm text-gray-900 line-clamp-2 group-hover:text-blue-600 transition-colors">
+                    <h3 className="font-semibold text-sm text-card-foreground line-clamp-2 group-hover:text-primary transition-colors">
                       {book.title}
                     </h3>
-                    <p className="text-xs text-gray-500 mt-1">
+                    <p className="text-xs text-muted-foreground mt-1">
                       {new Date(book.createdAt).toLocaleDateString('rw-RW', {
                         month: 'short',
                         day: 'numeric'

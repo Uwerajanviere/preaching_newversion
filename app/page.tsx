@@ -12,7 +12,7 @@ export default function Home() {
   const videoLimit = 3; // Define the number of videos to display on the homepage
 
   return (
-    <div className="relative min-h-screen flex flex-col bg-white">
+    <div className="relative min-h-screen flex flex-col bg-background">
 
       {/* Navigation */}
       <Navigation />
@@ -28,17 +28,24 @@ export default function Home() {
         <LatestBibleStudiesSection />
 
         {/* Sermons Section */}
-        <section id="latest-sermons" className="py-16 md:py-24 bg-gray-50">
+        <section id="latest-sermons" className="py-16 md:py-24 bg-muted/30">
           <div className="container mx-auto px-4">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 text-center mb-12">Latest Sermons</h2>
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground text-center mb-12">Latest Sermons</h2>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              <VideoSection key="faith" category="Faith" limit={videoLimit} />
-              <VideoSection key="grace" category="Grace" limit={videoLimit} />
-              <VideoSection key="love" category="Love" limit={videoLimit} />
-              <VideoSection key="hope" category="Hope" limit={videoLimit} />
-              <VideoSection key="salvation" category="Salvation" limit={videoLimit} />
-              <VideoSection key="prayer" category="Prayer" limit={videoLimit} />
+              <VideoSection key="faith" category="Faith" limit={2} />
+              <VideoSection key="grace" category="Grace" limit={2} />
+              <VideoSection key="love" category="Love" limit={2} />
+            </div>
+            
+            {/* View All Videos Button */}
+            <div className="text-center mt-12">
+              <Link href="/videos" className="inline-flex items-center px-6 py-3 bg-primary text-primary-foreground font-semibold rounded-lg hover:bg-primary/90 transition-colors">
+                Reba Amashusho Yose
+                <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+              </Link>
             </div>
           </div>
         </section>

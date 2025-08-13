@@ -43,10 +43,10 @@ export default function TwigeBibiliyaPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex flex-col">
+      <div className="min-h-screen flex flex-col bg-background">
         <Navigation />
         <div className="flex-1 flex items-center justify-center">
-          <Loader2 className="h-8 w-8 animate-spin" />
+          <Loader2 className="h-8 w-8 animate-spin text-primary" />
         </div>
 
       </div>
@@ -55,10 +55,10 @@ export default function TwigeBibiliyaPage() {
 
   if (error) {
     return (
-      <div className="min-h-screen flex flex-col">
+      <div className="min-h-screen flex flex-col bg-background">
         <Navigation />
         <div className="flex-1 flex items-center justify-center">
-          <p className="text-red-500">{error}</p>
+          <p className="text-destructive">{error}</p>
         </div>
 
       </div>
@@ -66,23 +66,23 @@ export default function TwigeBibiliyaPage() {
   }
 
   return (
-    <div className="min-h-screen flex flex-col bg-gray-50">
+    <div className="min-h-screen flex flex-col bg-background">
       <Navigation />
       
       <main className="flex-1 container mx-auto px-4 py-8">
         <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+          <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
             Twige Bibiliya
           </h1>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
             Soma amabwiriza n'amakuru y'ubwiyunge kugira ngo wiyongere ubumenyi bw'Inyandiko Ntagatifu
           </p>
         </div>
 
         {bibleStudies.length === 0 ? (
           <div className="text-center py-12">
-            <BookOpen className="h-16 w-16 text-gray-400 mx-auto mb-4" />
-            <p className="text-gray-500 text-lg">Nta cyigisho kihari ubu.</p>
+            <BookOpen className="h-16 w-16 text-muted-foreground mx-auto mb-4" />
+            <p className="text-muted-foreground text-lg">Nta cyigisho kihari ubu.</p>
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -100,13 +100,13 @@ export default function TwigeBibiliyaPage() {
                       />
                     </div>
                     <div className="p-6">
-                      <h3 className="font-bold text-xl text-gray-900 line-clamp-2 group-hover:text-blue-600 transition-colors mb-3">
+                      <h3 className="font-bold text-xl text-card-foreground line-clamp-2 group-hover:text-primary transition-colors mb-3">
                         {study.title}
                       </h3>
-                      <p className="text-gray-600 line-clamp-3 mb-4">
+                      <p className="text-muted-foreground line-clamp-3 mb-4">
                         {study.content.substring(0, 150)}...
                       </p>
-                      <div className="flex items-center gap-2 text-sm text-gray-500">
+                      <div className="flex items-center gap-2 text-sm text-muted-foreground">
                         <Calendar className="h-4 w-4" />
                         {new Date(study.createdAt).toLocaleDateString('rw-RW', {
                           year: 'numeric',

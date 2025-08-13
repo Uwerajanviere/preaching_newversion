@@ -43,10 +43,10 @@ export default function IbitaboPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex flex-col">
+      <div className="min-h-screen flex flex-col bg-background">
         <Navigation />
         <div className="flex-1 flex items-center justify-center">
-          <Loader2 className="h-8 w-8 animate-spin" />
+          <Loader2 className="h-8 w-8 animate-spin text-primary" />
         </div>
 
       </div>
@@ -55,10 +55,10 @@ export default function IbitaboPage() {
 
   if (error) {
     return (
-      <div className="min-h-screen flex flex-col">
+      <div className="min-h-screen flex flex-col bg-background">
         <Navigation />
         <div className="flex-1 flex items-center justify-center">
-          <p className="text-red-500">{error}</p>
+          <p className="text-destructive">{error}</p>
         </div>
 
       </div>
@@ -66,22 +66,22 @@ export default function IbitaboPage() {
   }
 
   return (
-    <div className="min-h-screen flex flex-col bg-gray-50">
+    <div className="min-h-screen flex flex-col bg-background">
       <Navigation />
       
       <main className="flex-1 container mx-auto px-4 py-8">
         <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+          <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
             Ibitabo
           </h1>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
             Soma ibitabo byiza byerekeye ubwiyunge, kwizera, n'ubuzima bwiza
           </p>
         </div>
 
         {books.length === 0 ? (
           <div className="text-center py-12">
-            <p className="text-gray-500 text-lg">Nta bitabo bihari ubu.</p>
+            <p className="text-muted-foreground text-lg">Nta bitabo bihari ubu.</p>
           </div>
         ) : (
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-4">
@@ -99,10 +99,10 @@ export default function IbitaboPage() {
                       />
                     </div>
                     <div className="p-3">
-                      <h3 className="font-semibold text-sm text-gray-900 line-clamp-2 group-hover:text-blue-600 transition-colors">
+                      <h3 className="font-semibold text-sm text-card-foreground line-clamp-2 group-hover:text-primary transition-colors">
                         {book.title}
                       </h3>
-                      <p className="text-xs text-gray-500 mt-1">
+                      <p className="text-xs text-muted-foreground mt-1">
                         {new Date(book.createdAt).toLocaleDateString('rw-RW', {
                           year: 'numeric',
                           month: 'short',

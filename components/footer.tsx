@@ -45,7 +45,6 @@ export function Footer() {
 
 
 
-          {/* Social Media */}
           <div className="flex justify-center gap-4 mb-10">
             <a
               href="https://facebook.com"
@@ -76,14 +75,7 @@ export function Footer() {
             </a>
           </div>
 
-          {/* Copyright */}
-          <div className="text-center text-white/80 text-sm px-4">
-            <p>
-              © {currentYear || '2024'} Atlantic Gateway Communications, Inc. Atlantic Gateway Communications, Inc.
-              serves and ministers to people globally through its ministries – MARTIN, Sermons, Teachings &
-              Messages.
-            </p>
-          </div>
+
         </div>
       </div>
     </footer>

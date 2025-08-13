@@ -8,6 +8,7 @@ import Image from "next/image"
 import { useTheme } from 'next-themes'
 import { Sun, Moon, ChevronDown, ChevronUp } from 'lucide-react'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { useRouter } from 'next/navigation'
 
 // Kinyarwanda Bible books
 const kinyarwandaBooks = [
@@ -84,7 +85,9 @@ export function Navigation() {
   const [isMounted, setIsMounted] = useState(false)
   const [selectedBook, setSelectedBook] = useState<string>("gen")
   const [selectedChapter, setSelectedChapter] = useState<string>("1")
+  const [searchQuery, setSearchQuery] = useState<string>("")
   const { theme, setTheme } = useTheme();
+  const router = useRouter();
 
   useEffect(() => {
     setIsMounted(true)
@@ -114,64 +117,43 @@ export function Navigation() {
     }
   };
 
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (searchQuery.trim()) {
+      router.push(`/search?q=${encodeURIComponent(searchQuery.trim())}`);
+    }
+  };
+
   return (
     <>
       <header
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isMounted && scrolled ? "bg-[#0a3a5c] backdrop-blur-md shadow-md" : "bg-[#0a3a5c]"}`}
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isMounted && scrolled ? "bg-primary/90 backdrop-blur-md shadow-md" : "bg-primary"}`}
       >
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             {/* Logo */}
             <div className="flex-shrink-0">
-              <Link href="/" className="text-3xl font-bold text-white">
+              <Link href="/" className="text-3xl font-bold text-primary-foreground">
                 <span className="">yera</span>
               </Link>
             </div>
 
-            {/* Bible Selection Dropdowns */}
-            <div className="hidden lg:flex items-center gap-2">
-              <Select value={selectedBook} onValueChange={setSelectedBook}>
-                <SelectTrigger className="w-40 bg-white/10 border-white/20 text-white">
-                  <SelectValue placeholder="Hitamo igitabo" />
-                </SelectTrigger>
-                <SelectContent>
-                  {kinyarwandaBooks.map((book) => (
-                    <SelectItem key={book.value} value={book.value}>
-                      {book.label}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
 
-              <Select value={selectedChapter} onValueChange={setSelectedChapter}>
-                <SelectTrigger className="w-16 bg-white/10 border-white/20 text-white">
-                  <SelectValue placeholder="1" />
-                </SelectTrigger>
-                <SelectContent>
-                  {Array.from({ length: 50 }, (_, i) => i + 1).map((chapter) => (
-                    <SelectItem key={chapter} value={chapter.toString()}>
-                      {chapter}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-
-            </div>
 
             {/* Navigation Links - Centered */}
             <nav className="hidden md:flex items-center justify-center flex-1 px-8">
               <div className="flex items-center space-x-8">
                 <div className="relative group">
-                  <button className="text-white hover:text-white/80 transition flex items-center gap-1">
+                  <button className="text-primary-foreground hover:text-primary-foreground/80 transition flex items-center gap-1">
                     Soma Bibiliya
                     <ChevronDown className="h-4 w-4" />
                   </button>
-                  <div className="absolute top-full left-0 mt-2 bg-black/90 backdrop-blur-sm border border-white/20 rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 min-w-48">
+                  <div className="absolute top-full left-0 mt-2 bg-popover backdrop-blur-sm border border-border rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 min-w-48">
                     <div className="p-2">
-                      <Link href="/twige-bibiliya" className="block px-3 py-2 text-white hover:bg-white/10 rounded text-sm">
+                      <Link href="/twige-bibiliya" className="block px-3 py-2 text-popover-foreground hover:bg-accent rounded text-sm">
                         Twige Bibiliya
                       </Link>
-                      <Link href="/ijambo-ryumunsi" className="block px-3 py-2 text-white hover:bg-white/10 rounded text-sm">
+                      <Link href="/ijambo-ryumunsi" className="block px-3 py-2 text-popover-foreground hover:bg-accent rounded text-sm">
                         Ijambo ry'Umunsi
                       </Link>
                     </div>
@@ -179,13 +161,13 @@ export function Navigation() {
                 </div>
 
                 <div className="relative group">
-                  <button className="text-white hover:text-white/80 transition flex items-center gap-1">
+                  <button className="text-primary-foreground hover:text-primary-foreground/80 transition flex items-center gap-1">
                     Indirimbo
                     <ChevronDown className="h-4 w-4" />
                   </button>
-                  <div className="absolute top-full left-0 mt-2 bg-black/90 backdrop-blur-sm border border-white/20 rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 min-w-48">
+                  <div className="absolute top-full left-0 mt-2 bg-popover backdrop-blur-sm border border-border rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 min-w-48">
                     <div className="p-2">
-                      <Link href="/umva-indirimbo" className="block px-3 py-2 text-white hover:bg-white/10 rounded text-sm">
+                      <Link href="/umva-indirimbo" className="block px-3 py-2 text-popover-foreground hover:bg-accent rounded text-sm">
                         Umva Indirimbo
                       </Link>
                     </div>
@@ -193,57 +175,49 @@ export function Navigation() {
                 </div>
 
                 <div className="relative group">
-                  <button className="text-white hover:text-white/80 transition flex items-center gap-1">
+                  <button className="text-primary-foreground hover:text-primary-foreground/80 transition flex items-center gap-1">
                     Isomero
                     <ChevronDown className="h-4 w-4" />
                   </button>
-                  <div className="absolute top-full left-0 mt-2 bg-black/90 backdrop-blur-sm border border-white/20 rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 min-w-48">
+                  <div className="absolute top-full left-0 mt-2 bg-popover backdrop-blur-sm border border-border rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 min-w-48">
                     <div className="p-2">
-                      <Link href="/ibitabo" className="block px-3 py-2 text-white hover:bg-white/10 rounded text-sm">
+                      <Link href="/ibitabo" className="block px-3 py-2 text-popover-foreground hover:bg-accent rounded text-sm">
                         Ibitabo
                       </Link>
                     </div>
                   </div>
                 </div>
 
-                <div className="relative group">
-                  <button className="text-white hover:text-white/80 transition flex items-center gap-1">
-                    Twige Bibiliya
-                    <ChevronDown className="h-4 w-4" />
-                  </button>
-                  <div className="absolute top-full left-0 mt-2 bg-black/90 backdrop-blur-sm border border-white/20 rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 min-w-48">
-                    <div className="p-2">
-                      <Link href="/twige-bibiliya" className="block px-3 py-2 text-white hover:bg-white/10 rounded text-sm">
-                        Twige Bibiliya
-                      </Link>
-                      <Link href="/ijambo-ryumunsi" className="block px-3 py-2 text-white hover:bg-white/10 rounded text-sm">
-                        Ijambo ry'Umunsi
-                      </Link>
-                    </div>
-                  </div>
-                </div>
+
               </div>
             </nav>
 
             {/* Search Bar */}
             <div className="hidden lg:flex items-center gap-4">
               <div className="relative">
-                <input
-                  type="text"
-                  placeholder="Shakisha"
-                  className="w-48 pl-4 pr-10 py-2 bg-white/10 border border-white/20 rounded-lg text-white placeholder:text-white/50 text-sm"
-                />
-                <button className="absolute right-3 top-1/2 transform -translate-y-1/2 text-white/50">
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                  </svg>
-                </button>
+                <form onSubmit={handleSearch}>
+                  <input
+                    type="text"
+                    placeholder="Shakisha"
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    className="w-48 pl-4 pr-10 py-2 bg-secondary/20 border border-border rounded-lg text-foreground placeholder:text-muted-foreground text-sm focus:outline-none focus:ring-2 focus:ring-primary/50"
+                  />
+                  <button 
+                    type="submit"
+                    className="absolute right-3 top-1/2 transform -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
+                  >
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                    </svg>
+                  </button>
+                </form>
               </div>
 
               <button
                 aria-label="Toggle theme"
                 onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-                className="p-2 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center"
+                className="p-2 rounded-full bg-secondary/20 hover:bg-secondary/30 text-foreground flex items-center justify-center transition-colors"
               >
                 {theme === 'dark' ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
               </button>
@@ -253,8 +227,8 @@ export function Navigation() {
         </div>
       </header>
 
-      {/* Secondary Black Navigation Bar */}
-      <div className="relative bg-black mt-20">
+      {/* Secondary Navigation Bar */}
+      <div className="relative bg-secondary mt-[80px]">
         <div className="container mx-auto px-4 py-3">
           <div className="flex items-center justify-between">
             {/* Left Side - Action Buttons */}
@@ -275,29 +249,20 @@ export function Navigation() {
             </div>
 
             {/* Center - Navigation Links */}
-            <div className="hidden md:flex items-center gap-6 text-white text-sm">
-              <Link href="/umva-indirimbo" className="hover:text-white/80 transition">
-                Turirimbe
-              </Link>
-              <Link href="/umva-indirimbo" className="hover:text-white/80 transition">
+            <div className="hidden md:flex items-center gap-6 text-secondary-foreground text-sm">
+              <Link href="/umva-indirimbo" className="hover:text-secondary-foreground/80 transition">
                 Umva Indirimbo
               </Link>
-              <Link href="/bible-quiz" className="hover:text-white/80 transition">
-                Bible Quiz
-              </Link>
-              <Link href="/topics" className="hover:text-white/80 transition">
-                Topics
-              </Link>
-              <Link href="/ibitabo" className="hover:text-white/80 transition">
+              <Link href="/ibitabo" className="hover:text-secondary-foreground/80 transition">
                 Ibitabo
               </Link>
-              <Link href="/videos" className="hover:text-white/80 transition">
+              <Link href="/videos" className="hover:text-secondary-foreground/80 transition">
                 Videos
               </Link>
-              <Link href="/about" className="hover:text-white/80 transition">
+              <Link href="/about" className="hover:text-secondary-foreground/80 transition">
                 Turi bande ?
               </Link>
-              <Link href="/contact" className="hover:text-white/80 transition">
+              <Link href="/contact" className="hover:text-secondary-foreground/80 transition">
                 Twandikire
               </Link>
             </div>

@@ -40,18 +40,18 @@ export function LatestBibleStudiesSection() {
 
   if (loading) {
     return (
-      <section className="py-16 md:py-24 bg-white">
+      <section className="py-16 md:py-24 bg-background">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 text-center mb-12">
+          <h2 className="text-3xl md:text-4xl font-bold text-foreground text-center mb-12">
             Twige Bibiliya
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[1, 2, 3].map((i) => (
               <div key={i} className="animate-pulse">
-                <div className="bg-gray-200 aspect-video rounded-t-lg"></div>
-                <div className="bg-gray-100 p-6 rounded-b-lg">
-                  <div className="h-4 bg-gray-200 rounded mb-2"></div>
-                  <div className="h-4 bg-gray-200 rounded w-2/3"></div>
+                <div className="bg-muted aspect-video rounded-t-lg"></div>
+                <div className="bg-card p-6 rounded-b-lg">
+                  <div className="h-4 bg-muted rounded mb-2"></div>
+                  <div className="h-4 bg-muted rounded w-2/3"></div>
                 </div>
               </div>
             ))}
@@ -63,14 +63,14 @@ export function LatestBibleStudiesSection() {
 
   if (bibleStudies.length === 0) {
     return (
-      <section className="py-16 md:py-24 bg-white">
+      <section className="py-16 md:py-24 bg-background">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 text-center mb-12">
+          <h2 className="text-3xl md:text-4xl font-bold text-foreground text-center mb-12">
             Twige Bibiliya
           </h2>
           <div className="text-center py-12">
-            <BookOpen className="h-16 w-16 text-gray-400 mx-auto mb-4" />
-            <p className="text-gray-500 text-lg">Nta cyigisho kihari ubu.</p>
+            <BookOpen className="h-16 w-16 text-muted-foreground mx-auto mb-4" />
+            <p className="text-muted-foreground text-lg">Nta cyigisho kihari ubu.</p>
           </div>
         </div>
       </section>
@@ -78,14 +78,14 @@ export function LatestBibleStudiesSection() {
   }
 
   return (
-    <section className="py-16 md:py-24 bg-white">
+    <section className="py-16 md:py-24 bg-background">
       <div className="container mx-auto px-4">
         {/* Section Header */}
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
             Twige Bibiliya
           </h2>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
             Soma amabwiriza n'amakuru y'ubwiyunge kugira ngo wiyongere ubumenyi bw'Inyandiko Ntagatifu
           </p>
         </div>
@@ -110,16 +110,16 @@ export function LatestBibleStudiesSection() {
 
                   {/* Study Content */}
                   <div className="p-6 flex-1 flex flex-col">
-                    <h3 className="font-bold text-xl text-gray-900 line-clamp-2 group-hover:text-blue-600 transition-colors mb-3">
+                    <h3 className="font-bold text-xl text-card-foreground line-clamp-2 group-hover:text-primary transition-colors mb-3">
                       {study.title}
                     </h3>
                     
-                    <p className="text-gray-600 line-clamp-3 mb-4 flex-1">
+                    <p className="text-muted-foreground line-clamp-3 mb-4 flex-1">
                       {study.content.substring(0, 120)}...
                     </p>
                     
                     <div className="flex items-center justify-between mt-auto">
-                      <div className="flex items-center gap-2 text-sm text-gray-500">
+                      <div className="flex items-center gap-2 text-sm text-muted-foreground">
                         <Calendar className="h-4 w-4" />
                         <span>
                           {new Date(study.createdAt).toLocaleDateString('rw-RW', {
@@ -129,7 +129,7 @@ export function LatestBibleStudiesSection() {
                         </span>
                       </div>
                       
-                      <div className="flex items-center gap-1 text-blue-600 group-hover:text-blue-700 text-sm font-medium">
+                      <div className="flex items-center gap-1 text-primary group-hover:text-primary/80 text-sm font-medium">
                         <span>Soma</span>
                         <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
                       </div>
@@ -146,7 +146,7 @@ export function LatestBibleStudiesSection() {
           <Link href="/twige-bibiliya">
             <Button 
               size="lg" 
-              className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-semibold transition-all duration-300 hover:shadow-lg"
+              className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-3 rounded-lg font-semibold transition-all duration-300 hover:shadow-lg"
             >
               <BookOpen className="h-5 w-5 mr-2" />
               Reba cyigisho cyose
