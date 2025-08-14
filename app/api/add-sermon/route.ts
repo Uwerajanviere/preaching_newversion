@@ -10,7 +10,6 @@ export async function GET() {
 }
 
 export async function POST(request: Request) {
-  const { db } = await import('@/firebase/firebaseAdmin');
   try {
     console.log('API route called');
     
@@ -19,7 +18,8 @@ export async function POST(request: Request) {
       console.error('Missing Firebase environment variables');
       return NextResponse.json({ 
         message: 'Firebase configuration missing',
-        error: 'Environment variables not set'
+        error: 'Environment variables not set',
+        solution: 'Please create a .env.local file with your Firebase service account credentials. See env.example for reference.'
       }, { status: 500 });
     }
     
@@ -31,10 +31,16 @@ export async function POST(request: Request) {
     // Basic validation
     if (!url || !category) {
       console.error('Missing required fields:', { url, category });
-      return NextResponse.json({ message: 'Missing required fields (url, category)' }, { status: 400 });
+      return NextResponse.json({ 
+        message: 'Missing required fields (url, category)',
+        error: 'Validation failed'
+      }, { status: 400 });
     }
 
     console.log('Adding document to Firestore with data:', { url, category, title, addedBy });
+
+    // Import Firebase admin after validation
+    const { db } = await import('@/firebase/firebaseAdmin') as { db: any };
 
     // Add document to Firestore using Admin SDK
     const docRef = await db.collection('youtubeLinks').add({
@@ -51,6 +57,16 @@ export async function POST(request: Request) {
 
   } catch (error) {
     console.error('Error adding sermon:', error);
+    
+    // Check if it's a Firebase configuration error
+    if (error instanceof Error && error.message.includes('Firebase not configured')) {
+      return NextResponse.json({ 
+        message: 'Firebase not configured',
+        error: 'Please set up your Firebase service account credentials',
+        solution: 'Create a .env.local file with FIREBASE_PROJECT_ID, FIREBASE_CLIENT_EMAIL, and FIREBASE_PRIVATE_KEY'
+      }, { status: 500 });
+    }
+    
     return NextResponse.json({ 
       message: 'Error adding sermon', 
       error: error instanceof Error ? error.message : 'Unknown error'
