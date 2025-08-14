@@ -6,8 +6,12 @@ import { getFirestore } from 'firebase-admin/firestore';
 const requiredEnvVars = {
   projectId: process.env.FIREBASE_PROJECT_ID,
   clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
-  privateKey: process.env.FIREBASE_PRIVATE_KEY,
+  privateKey: process.env.FIREBASE_PRIVATE_KEY?.replace(/\\n/g, '\n'), // ✅ fixed for Vercel
 };
+
+console.log("FIREBASE PROJECT ID:", process.env.FIREBASE_PROJECT_ID);
+console.log("EMAIL:", process.env.FIREBASE_CLIENT_EMAIL);
+console.log("PRIVATE KEY length:", process.env.FIREBASE_PRIVATE_KEY?.length);
 
 // Validate environment variables
 const missingVars = Object.entries(requiredEnvVars)
@@ -31,7 +35,7 @@ try {
     const serviceAccount = {
       projectId: requiredEnvVars.projectId,
       clientEmail: requiredEnvVars.clientEmail,
-      privateKey: requiredEnvVars.privateKey?.replace(/\\n/g, '\n'),
+      privateKey: requiredEnvVars.privateKey,
     };
 
     app = !getApps().length ? initializeApp({ credential: cert(serviceAccount) }) : getApps()[0];
@@ -62,4 +66,4 @@ try {
   } as any;
 }
 
-export { db }; 
+export { db };
