@@ -11,6 +11,14 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
+  // Prevent static generation of problematic pages
+  experimental: {
+    missingSuspenseWithCSRBailout: false,
+  },
+  // Force dynamic rendering for search page
+  async generateStaticParams() {
+    return [];
+  },
   webpack: (config, { isServer }) => {
     if (!isServer) {
       config.plugins.push(new MiniCssExtractPlugin());
