@@ -85,7 +85,6 @@ export function Navigation() {
   const [isMounted, setIsMounted] = useState(false)
   const [selectedBook, setSelectedBook] = useState<string>("gen")
   const [selectedChapter, setSelectedChapter] = useState<string>("1")
-  const [searchQuery, setSearchQuery] = useState<string>("")
   const { theme, setTheme } = useTheme();
   const router = useRouter();
 
@@ -117,12 +116,7 @@ export function Navigation() {
     }
   };
 
-  const handleSearch = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (searchQuery.trim()) {
-      router.push(`/search?q=${encodeURIComponent(searchQuery.trim())}`);
-    }
-  };
+
 
   return (
     <>
@@ -192,34 +186,13 @@ export function Navigation() {
               </div>
             </nav>
 
-            {/* Search Bar */}
             <div className="hidden lg:flex items-center gap-4">
-              <div className="relative">
-                <form onSubmit={handleSearch}>
-                  <input
-                    type="text"
-                    placeholder="Shakisha"
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                    className="w-48 pl-4 pr-10 py-2 bg-secondary/20 border border-border rounded-lg text-foreground placeholder:text-muted-foreground text-sm focus:outline-none focus:ring-2 focus:ring-primary/50"
-                  />
-                  <button 
-                    type="submit"
-                    className="absolute right-3 top-1/2 transform -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
-                  >
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                    </svg>
-                  </button>
-                </form>
-              </div>
-
               <button
                 aria-label="Toggle theme"
                 onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
                 className="p-2 rounded-full bg-secondary/20 hover:bg-secondary/30 text-foreground flex items-center justify-center transition-colors"
               >
-                {theme === 'dark' ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
+                {theme === 'dark' ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
               </button>
               <MobileMenu />
             </div>
