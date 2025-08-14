@@ -1,0 +1,5 @@
+[33m5ace526[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m)[m corrected dashboard issue
+[33m0467ff5[m updated loght mode
+[33mc13202b[m new version
+[33mc50a024[m Push latest changes: mobile menu nav links and bug fixes
+[33mcaeaa78[m Refactor Firebase setup: dynamic imports, correct paths, and Vercel env guidance
