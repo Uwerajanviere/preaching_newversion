@@ -1,6 +1,3 @@
-import Image from "next/image"
-import { Play, Volume2 } from "lucide-react"
-import { Button } from "@/components/ui/button"
 import { Navigation } from "@/components/navigation"
 import { VideoSection } from "@/components/video-section"
 import { DailyWordSection } from "@/components/daily-word-section"
@@ -9,7 +6,6 @@ import { LatestBibleStudiesSection } from "@/components/latest-bible-studies-sec
 import Link from 'next/link'
 
 export default function Home() {
-  const videoLimit = 3; // Define the number of videos to display on the homepage
 
   return (
     <div className="relative min-h-screen flex flex-col bg-background">

@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { YouTubeVideo } from '@/components/youtube-video';
 import { getYouTubeLinksByCategory } from '@/lib/firebase-service';
-import { YouTubeLinkCategory } from '@/lib/types';
+import { YouTubeLinkCategory, YouTubeLink } from '@/lib/types';
 import Image from 'next/image';
 import Link from 'next/link';
 
