@@ -23,15 +23,27 @@ export default function IjamboRyumunsiPage() {
 
   const fetchDailyWord = async () => {
     try {
-      const response = await fetch('/api/daily-word');
+      // Debug logging
+      const apiUrl = '/api/daily-word';
+      console.log('Fetching daily word from:', apiUrl);
+      console.log('Current window location:', window.location.href);
+      
+      const response = await fetch(apiUrl);
+      console.log('Response status:', response.status);
+      console.log('Response ok:', response.ok);
+      console.log('Response headers:', Object.fromEntries(response.headers.entries()));
+      
       if (!response.ok) {
-        throw new Error('Failed to fetch daily word');
+        const errorText = await response.text();
+        console.error('Response error text:', errorText);
+        throw new Error(`Failed to fetch daily word: ${response.status} ${response.statusText}`);
       }
       const data = await response.json();
+      console.log('Daily word data:', data);
       setDailyWord(data);
     } catch (err) {
-      setError('Failed to load daily word');
       console.error('Error fetching daily word:', err);
+      setError(err instanceof Error ? err.message : 'Failed to load daily word');
     } finally {
       setLoading(false);
     }

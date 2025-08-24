@@ -56,9 +56,17 @@ export default function AdminPage() {
       console.log('Response headers:', response.headers);
 
       if (!response.ok) {
-        const errorData = await response.json();
-        console.error('API Error:', errorData);
-        throw new Error(errorData.message || 'Failed to add sermon');
+        let errorMessage = 'Failed to add sermon';
+        try {
+          const errorData = await response.json();
+          console.error('API Error:', errorData);
+          errorMessage = errorData.error || errorData.message || errorMessage;
+        } catch (parseError) {
+          const errorText = await response.text();
+          console.error('API Error Text:', errorText);
+          errorMessage = errorText || errorMessage;
+        }
+        throw new Error(errorMessage);
       }
 
       const result = await response.json();

@@ -29,8 +29,12 @@ export function DailyWordUpload() {
       setIsLoading(true);
       
       console.log('Submitting daily word data:', data);
+      console.log('Current window location:', window.location.href);
       
-      const response = await fetch('/api/daily-word', {
+      const apiUrl = '/api/daily-word';
+      console.log('Making POST request to:', apiUrl);
+      
+      const response = await fetch(apiUrl, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -41,8 +45,14 @@ export function DailyWordUpload() {
         }),
       });
 
+      console.log('Response status:', response.status);
+      console.log('Response ok:', response.ok);
+      console.log('Response headers:', Object.fromEntries(response.headers.entries()));
+
       if (!response.ok) {
-        throw new Error('Failed to upload daily word');
+        const errorText = await response.text();
+        console.error('Response error text:', errorText);
+        throw new Error(`Failed to upload daily word: ${response.status} ${response.statusText}`);
       }
 
       const result = await response.json();
@@ -53,7 +63,8 @@ export function DailyWordUpload() {
       
     } catch (error) {
       console.error('Error uploading daily word:', error);
-      toast.error("Failed to upload daily word. Please try again.");
+      const errorMessage = error instanceof Error ? error.message : 'Failed to upload daily word. Please try again.';
+      toast.error(errorMessage);
     } finally {
       setIsLoading(false);
     }
